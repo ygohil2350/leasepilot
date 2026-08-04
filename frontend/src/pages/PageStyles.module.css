@@ -1,0 +1,291 @@
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+.stat {
+  padding: 1.25rem;
+}
+.stat > span {
+  color: var(--text-soft);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+.stat strong {
+  display: block;
+  margin-top: 0.6rem;
+  font: 800 2rem Manrope;
+}
+.stat small {
+  color: var(--brand);
+}
+.contentGrid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.panel {
+  padding: 1.3rem;
+}
+.panel h2 {
+  font-size: 1.05rem;
+}
+.activity {
+  display: grid;
+  gap: 0.25rem;
+}
+.activity > div {
+  display: grid;
+  grid-template-columns: 40px 1fr auto;
+  gap: 0.7rem;
+  align-items: center;
+  padding: 0.8rem 0;
+  border-bottom: 1px solid var(--border);
+}
+.activity > div:last-child {
+  border: none;
+}
+.activity i {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  background: var(--brand-soft);
+  color: var(--brand);
+  font-style: normal;
+}
+.activity strong,
+.activity small {
+  display: block;
+}
+.activity small {
+  color: var(--text-soft);
+}
+.occupancy {
+  display: grid;
+  place-items: center;
+  padding: 1.5rem;
+}
+.ring {
+  --value: 0;
+  width: 155px;
+  height: 155px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: conic-gradient(var(--brand) calc(var(--value) * 1%), var(--surface-strong) 0);
+  position: relative;
+}
+.ring::after {
+  content: '';
+  position: absolute;
+  inset: 14px;
+  border-radius: 50%;
+  background: var(--surface);
+}
+.ring strong {
+  position: relative;
+  z-index: 1;
+  font: 800 2rem Manrope;
+}
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-bottom: 1rem;
+}
+.toolbar input,
+.toolbar select {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface);
+  color: var(--text);
+  padding: 0.65rem 0.75rem;
+}
+.search {
+  flex: 1 1 240px;
+}
+.viewToggle {
+  display: flex;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.viewToggle button {
+  border: 0;
+  background: var(--surface);
+  color: var(--text-soft);
+  padding: 0.65rem 0.75rem;
+  cursor: pointer;
+}
+.viewToggle .active {
+  background: var(--brand);
+  color: white;
+}
+.listingLayout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(340px, 0.9fr);
+  gap: 1rem;
+  align-items: start;
+}
+.propertyGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+.listingLayout.listOnly {
+  display: block;
+}
+.listOnly .propertyGrid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.mapOnly {
+  display: block;
+}
+.results {
+  color: var(--text-soft);
+  font-size: 0.85rem;
+  margin-bottom: 0.75rem;
+}
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.7rem;
+  margin-top: 1.5rem;
+}
+.pagination button {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  border-radius: 8px;
+  padding: 0.5rem 0.8rem;
+}
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.table th,
+.table td {
+  text-align: left;
+  padding: 0.9rem 0.7rem;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.84rem;
+}
+.table th {
+  color: var(--text-soft);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.actions {
+  display: flex;
+  gap: 0.4rem;
+}
+.actions button {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.4rem 0.6rem;
+  background: var(--surface-raised);
+  color: var(--text);
+  cursor: pointer;
+}
+.detailGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) 370px;
+  gap: 1.4rem;
+}
+.gallery {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: 180px 180px;
+  gap: 0.6rem;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+}
+.gallery img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.gallery img:first-child {
+  grid-row: 1 / 3;
+}
+.detailBody {
+  margin-top: 1.5rem;
+}
+.detailBody h1 {
+  font-size: 2.2rem;
+  margin-bottom: 0.3rem;
+}
+.features {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem 0;
+  margin: 1rem 0;
+  border-block: 1px solid var(--border);
+  font-weight: 700;
+}
+.asideCard {
+  padding: 1.4rem;
+  position: sticky;
+  top: 96px;
+}
+.asideCard .price {
+  font: 800 2rem Manrope;
+  color: var(--brand);
+}
+.asideCard form {
+  display: grid;
+  gap: 0.9rem;
+  margin-top: 1.2rem;
+}
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+.formGrid .wide {
+  grid-column: 1 / -1;
+}
+@media (max-width: 1050px) {
+  .stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .listingLayout {
+    grid-template-columns: 1fr;
+  }
+  .propertyGrid,
+  .listOnly .propertyGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .detailGrid {
+    grid-template-columns: 1fr;
+  }
+  .asideCard {
+    position: static;
+  }
+}
+@media (max-width: 700px) {
+  .stats,
+  .contentGrid,
+  .propertyGrid,
+  .listOnly .propertyGrid,
+  .formGrid {
+    grid-template-columns: 1fr;
+  }
+  .gallery {
+    grid-template-rows: 220px 100px;
+  }
+  .toolbar > * {
+    flex: 1 1 140px;
+  }
+  .tableWrap {
+    overflow-x: auto;
+  }
+  .pageHeadingAction {
+    width: 100%;
+  }
+}

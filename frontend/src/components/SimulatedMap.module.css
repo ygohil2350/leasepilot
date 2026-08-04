@@ -1,0 +1,83 @@
+.map {
+  position: relative;
+  min-height: 520px;
+  height: 100%;
+  overflow: hidden;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background-color: #e5e6db;
+  background-image:
+    linear-gradient(rgba(65, 95, 83, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(65, 95, 83, 0.08) 1px, transparent 1px);
+  background-size: 42px 42px;
+}
+:root[data-theme='dark'] .map {
+  background-color: #26332e;
+}
+.road {
+  position: absolute;
+  display: block;
+  width: 140%;
+  height: 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  transform-origin: center;
+}
+.one {
+  left: -20%;
+  top: 30%;
+  transform: rotate(12deg);
+}
+.two {
+  left: -20%;
+  top: 70%;
+  transform: rotate(-18deg);
+}
+.three {
+  left: 35%;
+  top: 0;
+  width: 14px;
+  height: 120%;
+  transform: rotate(7deg);
+}
+.water {
+  position: absolute;
+  right: -5%;
+  bottom: -8%;
+  width: 36%;
+  height: 35%;
+  border-radius: 60% 0 0;
+  background: #a9cdd0;
+  opacity: 0.7;
+}
+.pin {
+  position: absolute;
+  transform: translate(-50%, -100%);
+  min-width: 34px;
+  height: 34px;
+  padding: 0 9px;
+  border: 3px solid #fff;
+  border-radius: 18px 18px 18px 3px;
+  rotate: -45deg;
+  background: var(--brand-strong);
+  color: #fff;
+  font-weight: 900;
+  cursor: pointer;
+  box-shadow: 0 4px 12px #19372e4d;
+}
+.pin::first-letter {
+  rotate: 45deg;
+}
+.active {
+  min-width: 52px;
+  border-radius: 18px;
+  rotate: 0deg;
+  transform: translate(-50%, -110%);
+  background: var(--accent);
+  z-index: 2;
+}
+@media (max-width: 700px) {
+  .map {
+    min-height: 390px;
+  }
+}

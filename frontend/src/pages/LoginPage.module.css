@@ -1,0 +1,168 @@
+.page {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  background: var(--surface);
+}
+.story {
+  position: relative;
+  overflow: hidden;
+  padding: 2.2rem 3.5rem;
+  background: #17382e;
+  color: #f3f8f5;
+  display: flex;
+  flex-direction: column;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  font: 800 1.1rem Manrope;
+}
+.brand span {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 11px;
+  background: #ef9b76;
+  color: #16372d;
+  font-size: 0.72rem;
+}
+.copy {
+  max-width: 580px;
+  margin: auto 0;
+  position: relative;
+  z-index: 2;
+}
+.copy > span {
+  color: #9fc8b8;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+}
+.copy h1 {
+  margin: 1rem 0 1.3rem;
+  font-size: clamp(3rem, 6vw, 6.3rem);
+  line-height: 0.95;
+  letter-spacing: -0.07em;
+}
+.copy > p {
+  max-width: 500px;
+  color: #c4d7cf;
+  font-size: 1.08rem;
+  line-height: 1.7;
+}
+.quote {
+  margin-top: 3rem;
+  max-width: 460px;
+  padding-left: 1.2rem;
+  border-left: 2px solid #ed9772;
+  color: #d7e5df;
+  line-height: 1.5;
+}
+.quote small {
+  display: block;
+  margin-top: 0.7rem;
+  color: #94b2a6;
+}
+.orbit {
+  position: absolute;
+  width: 480px;
+  height: 480px;
+  right: -190px;
+  bottom: -190px;
+  border: 1px solid #5b7d704d;
+  border-radius: 50%;
+}
+.orbit span {
+  position: absolute;
+  inset: 12%;
+  border: 1px solid #5b7d704d;
+  border-radius: 50%;
+}
+.orbit span:nth-child(2) {
+  inset: 28%;
+}
+.orbit span:nth-child(3) {
+  inset: 43%;
+  background: #ef9b76;
+  border: none;
+}
+.formSide {
+  position: relative;
+  display: grid;
+  place-items: center;
+  padding: 5rem 2rem 2rem;
+}
+.theme {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+}
+.formSide form {
+  width: min(420px, 100%);
+}
+.formSide h2 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+.formSide form > .field {
+  margin-top: 1.1rem;
+}
+.demos {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.45rem;
+  margin: 1.6rem 0;
+}
+.demos button {
+  border: 1px solid var(--border);
+  background: var(--surface-raised);
+  color: var(--text-soft);
+  padding: 0.6rem;
+  border-radius: 9px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+.demos .selected {
+  border-color: var(--brand);
+  color: var(--brand);
+  background: var(--brand-soft);
+}
+.submit {
+  width: 100%;
+  margin-top: 1.2rem;
+}
+.submit span {
+  margin-left: auto;
+}
+.hint {
+  display: block;
+  text-align: center;
+  margin-top: 1rem;
+  color: var(--text-soft);
+}
+.mobileBrand {
+  display: none;
+}
+@media (max-width: 850px) {
+  .page {
+    display: block;
+    background: var(--bg);
+  }
+  .story {
+    display: none;
+  }
+  .formSide {
+    min-height: 100vh;
+    padding: 5rem 1.2rem 2rem;
+  }
+  .mobileBrand {
+    display: block;
+    font: 800 1.4rem Manrope;
+    color: var(--brand);
+    margin-bottom: 3rem;
+  }
+}

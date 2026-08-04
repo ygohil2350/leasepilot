@@ -1,0 +1,8 @@
+node_modules
+.npm-cache
+backend/.npm-cache
+frontend/.npm-cache
+.docker-local
+dist
+coverage
+package-lock.json

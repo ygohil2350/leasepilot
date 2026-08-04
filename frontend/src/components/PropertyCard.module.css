@@ -1,0 +1,104 @@
+.card {
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s,
+    border-color 0.2s;
+  min-width: 0;
+}
+.card:hover,
+.selected {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--brand);
+}
+.imageWrap {
+  height: 200px;
+  position: relative;
+  overflow: hidden;
+  background: var(--surface-strong);
+}
+.imageWrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s;
+}
+.card:hover img {
+  transform: scale(1.04);
+}
+.favorite {
+  position: absolute;
+  right: 0.8rem;
+  top: 0.8rem;
+  width: 38px;
+  height: 38px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.92);
+  color: #b9544d;
+  font-size: 1.35rem;
+  cursor: pointer;
+}
+.status {
+  position: absolute;
+  left: 0.8rem;
+  top: 0.8rem;
+  border-radius: 99px;
+  padding: 0.35rem 0.65rem;
+  background: rgba(23, 55, 46, 0.9);
+  color: white;
+  text-transform: capitalize;
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+.body {
+  padding: 1rem 1.05rem 1.15rem;
+}
+.price {
+  color: var(--brand);
+  font: 800 1.35rem Manrope;
+}
+.price span {
+  font: 600 0.8rem 'DM Sans';
+  color: var(--text-soft);
+}
+.body h3 {
+  margin: 0.45rem 0 0.15rem;
+  font-size: 1.05rem;
+}
+.body p {
+  color: var(--text-soft);
+  font-size: 0.85rem;
+  margin-bottom: 0.75rem;
+}
+.specs {
+  display: flex;
+  gap: 0.8rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+.amenities {
+  display: flex;
+  gap: 0.4rem;
+  margin: 0.8rem 0;
+}
+.amenities span {
+  background: var(--surface-strong);
+  padding: 0.25rem 0.45rem;
+  border-radius: 6px;
+  color: var(--text-soft);
+  font-size: 0.68rem;
+}
+.body a {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 0.8rem;
+  border-top: 1px solid var(--border);
+  color: var(--brand);
+  font-weight: 800;
+  font-size: 0.85rem;
+}

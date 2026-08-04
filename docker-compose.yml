@@ -1,0 +1,48 @@
+services:
+  mongo:
+    image: mongo:7-jammy
+    command: ['mongod', '--replSet', 'rs0', '--bind_ip_all']
+    restart: unless-stopped
+    volumes: [mongo-data:/data/db]
+    healthcheck:
+      test:
+        [
+          'CMD-SHELL',
+          'mongosh --quiet --eval "try { rs.status().ok } catch (e) { rs.initiate({_id:''rs0'',members:[{_id:0,host:''mongo:27017''}]}).ok }" | grep 1',
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+  api:
+    build: ./backend
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      PORT: 4000
+      MONGODB_URI: mongodb://mongo:27017/leasepilot?replicaSet=rs0
+      JWT_SECRET: ${JWT_SECRET:-development-only-secret-change-me-123456}
+      JWT_EXPIRES_IN: ${JWT_EXPIRES_IN:-1d}
+      CORS_ORIGIN: ${CORS_ORIGIN:-http://localhost:8080}
+    depends_on:
+      mongo: { condition: service_healthy }
+    healthcheck:
+      test:
+        [
+          'CMD',
+          'node',
+          '-e',
+          "fetch('http://localhost:4000/health').then(r=>{if(!r.ok)process.exit(1)})",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+  web:
+    build:
+      context: ./frontend
+      args: { VITE_API_URL: /api/v1 }
+    restart: unless-stopped
+    ports: ['${WEB_PORT:-8080}:80']
+    depends_on:
+      api: { condition: service_healthy }
+volumes:
+  mongo-data:

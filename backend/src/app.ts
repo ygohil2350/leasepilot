@@ -1,0 +1,25 @@
+import cors from 'cors';
+import express from 'express';
+import helmet from 'helmet';
+import morgan from 'morgan';
+import authRoutes from './routes/authRoutes.js';
+import propertyRoutes from './routes/propertyRoutes.js';
+import applicationRoutes from './routes/applicationRoutes.js';
+import maintenanceRoutes from './routes/maintenanceRoutes.js';
+import dashboardRoutes from './routes/dashboardRoutes.js';
+import { env } from './config/env.js';
+import { errorHandler, notFound } from './middleware/errors.js';
+export const app = express();
+app.use(helmet());
+app.use(cors({ origin: env.CORS_ORIGIN.split(','), credentials: true }));
+app.use(express.json({ limit: '1mb' }));
+if (env.NODE_ENV !== 'test')
+  app.use(morgan('combined', { skip: (req) => Boolean(req.headers.authorization) }));
+app.get('/health', (_req, res) => res.json({ status: 'ok', timestamp: new Date().toISOString() }));
+app.use('/api/v1/auth', authRoutes);
+app.use('/api/v1/properties', propertyRoutes);
+app.use('/api/v1/applications', applicationRoutes);
+app.use('/api/v1/maintenance', maintenanceRoutes);
+app.use('/api/v1/dashboard', dashboardRoutes);
+app.use(notFound);
+app.use(errorHandler);
