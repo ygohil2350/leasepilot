@@ -11,4 +11,5 @@ ENV NODE_ENV=production
 COPY package*.json ./
 RUN npm ci --omit=dev
 COPY --from=build /app/dist ./dist
-CMD ["node", "dist/src/server.js"]
+USER node
+CMD ["sh", "-c", "node dist/src/seed.js && exec node dist/src/server.js"]

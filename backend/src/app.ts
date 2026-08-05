@@ -10,12 +10,20 @@ import dashboardRoutes from './routes/dashboardRoutes.js';
 import { env } from './config/env.js';
 import { errorHandler, notFound } from './middleware/errors.js';
 export const app = express();
-app.use(helmet());
+app.use(
+  helmet({
+    contentSecurityPolicy: false,
+    xFrameOptions: false,
+  }),
+);
 app.use(cors({ origin: env.CORS_ORIGIN.split(','), credentials: true }));
 app.use(express.json({ limit: '1mb' }));
 if (env.NODE_ENV !== 'test')
   app.use(morgan('combined', { skip: (req) => Boolean(req.headers.authorization) }));
-app.get('/health', (_req, res) => res.json({ status: 'ok', timestamp: new Date().toISOString() }));
+const health = (_req: express.Request, res: express.Response) =>
+  res.json({ status: 'ok', timestamp: new Date().toISOString() });
+app.get('/health', health);
+app.get('/api/v1/health', health);
 app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/properties', propertyRoutes);
 app.use('/api/v1/applications', applicationRoutes);

@@ -15,7 +15,7 @@ services:
       retries: 20
   api:
     build: { context: ./backend, target: development }
-    command: npm run dev
+    command: sh -c "npm run seed:dev && npm run dev"
     environment:
       NODE_ENV: development
       PORT: 4000

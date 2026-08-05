@@ -94,7 +94,7 @@ Tickets can only be created by the current tenant for their active rented proper
 
 1. Copy `.env.example` to `.env` and replace `JWT_SECRET`.
 2. Run `docker compose up --build -d`.
-3. Seed with `docker compose exec api npm run seed`.
+3. Wait for the API health check; demo data is seeded automatically and idempotently.
 4. Open [http://localhost:8080](http://localhost:8080).
 
 Production Compose persists MongoDB data and gates API/frontend startup through health checks.
@@ -234,9 +234,7 @@ Remove-Item -LiteralPath leasepilot-deploy.tar.gz
 
 ssh -i $KEY_FILE "ubuntu@$PUBLIC_IP" "cd /home/ubuntu/leasepilot && printf 'JWT_SECRET=%s\nCORS_ORIGIN=http://$PUBLIC_IP\nWEB_PORT=80\n' `$(openssl rand -hex 32) > .env && sudo docker compose up --build -d"
 
-ssh -i $KEY_FILE "ubuntu@$PUBLIC_IP" "cd /home/ubuntu/leasepilot && sudo docker compose exec api npm run seed"
-
-ssh -i $KEY_FILE "ubuntu@$PUBLIC_IP" "cd /home/ubuntu/leasepilot && sudo docker compose ps && sudo docker compose exec api node -e \"fetch('http://localhost:4000/health').then(async response => { console.log(await response.text()); if (!response.ok) process.exit(1); })\""
+ssh -i $KEY_FILE "ubuntu@$PUBLIC_IP" "cd /home/ubuntu/leasepilot && sudo docker compose ps && sudo docker compose exec api node -e \"fetch('http://localhost:4000/api/v1/health').then(async response => { console.log(await response.text()); if (!response.ok) process.exit(1); })\""
 
 Start-Process "http://$PUBLIC_IP"
 ```

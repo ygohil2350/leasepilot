@@ -1,4 +1,5 @@
 import bcrypt from 'bcryptjs';
+import mongoose from 'mongoose';
 import { connectDatabase } from './config/database.js';
 import { MaintenanceTicket } from './models/MaintenanceTicket.js';
 import { Property } from './models/Property.js';
@@ -28,6 +29,14 @@ const titles = [
 
 const run = async () => {
   await connectDatabase();
+  const seedMetadata = mongoose.connection.collection<{ _id: string; seededAt: Date }>(
+    'seed_metadata',
+  );
+  const seedId = 'leasepilot-demo-v1';
+  if (await seedMetadata.findOne({ _id: seedId })) {
+    console.log('Demo data already seeded; skipping.');
+    process.exit(0);
+  }
   const passwordHash = await bcrypt.hash('Demo123!', 12);
   const landlord = await User.findOneAndUpdate(
     { email: 'landlord@leasepilot.demo' },
@@ -175,6 +184,11 @@ const run = async () => {
       imageUrls: [],
     },
   ]);
+  await seedMetadata.updateOne(
+    { _id: seedId },
+    { $set: { seededAt: new Date() } },
+    { upsert: true },
+  );
   console.log('Seed complete. Demo password: Demo123!');
   process.exit(0);
 };
