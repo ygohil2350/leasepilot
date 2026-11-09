@@ -4,14 +4,15 @@ services:
     name: leasepilot-api
     runtime: docker
     plan: free
+    region: singapore
     dockerfilePath: ./backend/Dockerfile
     dockerContext: ./backend
     healthCheckPath: /health
     envVars:
       - key: MONGODB_URI # mongodb+srv://USER:PASSWORD@CLUSTER/leasepilot?retryWrites=true&w=majority
         sync: false
-      - key: CORS_ORIGIN # the Vercel URL of the web app
-        sync: false
+      - key: CORS_ORIGIN
+        value: https://leasepilot-ten.vercel.app
       - key: JWT_SECRET
         generateValue: true
       - key: JWT_EXPIRES_IN
