@@ -1,0 +1,20 @@
+# Render Blueprint for the API. The web app deploys to Vercel; the database is MongoDB Atlas (M0).
+services:
+  - type: web
+    name: leasepilot-api
+    runtime: docker
+    plan: free
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: ./backend
+    healthCheckPath: /health
+    envVars:
+      - key: MONGODB_URI # mongodb+srv://USER:PASSWORD@CLUSTER/leasepilot?retryWrites=true&w=majority
+        sync: false
+      - key: CORS_ORIGIN # the Vercel URL of the web app
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_EXPIRES_IN
+        value: 1d
+      - key: NODE_ENV
+        value: production
